@@ -8,24 +8,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ForecastFragment">
 
-    <EditText
-        android:layout_width="236dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/getZipCode"
-        android:hint="enter zip code"
-        android:password="false" />
-
     <ListView
         android:id="@+id/listview_forecast"
         android:layout_width="match_parent"
-        android:layout_height="367dp"
-        android:layout_gravity="left|center_vertical" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="get zip code"
-        android:id="@+id/getZipCodeButton"
-        android:layout_gravity="right|top" />
+        android:layout_height="fill_parent"
+        android:layout_gravity="right|center_vertical" />
 
 </FrameLayout>

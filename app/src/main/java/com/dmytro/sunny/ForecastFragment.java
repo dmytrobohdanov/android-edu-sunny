@@ -58,7 +58,7 @@ public class ForecastFragment extends Fragment {
         int id = item.getItemId();
         if(id == R.id.action_refresh){
             FetchWeatherTask weatherTask = new FetchWeatherTask();
-            weatherTask.execute("91005");
+            weatherTask.execute("91000");
             return true;
         }
 
@@ -69,26 +69,8 @@ public class ForecastFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-//        //get zip code from user
-//        final String[] zipCode = new String[1];
-//
-//        Button getZipCode = (Button) getActivity().findViewById(R.id.getZipCodeButton);
-//        getZipCode.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                EditText editText = (EditText) getActivity().findViewById(R.id.getZipCode);
-//                zipCode[0] = editText.getText().toString();
-//            }
-//        });
-
         String[] data = {
-                "Mon 6/23 - Sunny - 31/17",
-                "Tue 6/24 - Foggy - 21/8",
-                "Wed 6/25 - Cloudy - 22/17",
-                "Thurs 6/26 - Rainy - 18/11",
-                "Fri 6/27 - Foggy - 21/10",
-                "Sat 6/28 - TRAPPED IN WEATHERSTATION - 23/18",
-                "Sun 6/29 - Sunny - 20/7"
+                "there is no data. Refresh it"
         };
 
         List<String> weekForecast = new ArrayList<>(Arrays.asList(data));
@@ -306,8 +288,16 @@ public class ForecastFragment extends Fragment {
             return null;
         }
 
+        @Override
+        protected void onPostExecute(String[] strings) {
+            super.onPostExecute(strings);
+            List<String> weekForecast = new ArrayList<>(Arrays.asList(strings));
 
-
+            forecastAdapter.clear();
+            for(String str: strings) {
+                forecastAdapter.add(str);
+            }
+        }
     }
 }
 
