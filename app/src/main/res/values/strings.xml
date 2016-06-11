@@ -5,4 +5,5 @@
     <string name="dayTemperatureVal">21°</string>
     <string name="nightTemperatureVal">7°</string>
     <string name="dateForWeather">Today</string>
+    <string name="title_activity_detail">DetailActivity</string>
 </resources>
