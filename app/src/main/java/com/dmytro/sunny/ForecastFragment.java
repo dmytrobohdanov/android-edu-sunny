@@ -1,5 +1,6 @@
 package com.dmytro.sunny;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -92,6 +93,10 @@ public class ForecastFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast toast = Toast.makeText(getContext(), forecastAdapter.getItem(position), Toast.LENGTH_SHORT);
                 toast.show();
+
+                Intent dailyForecastDetails = new Intent(getContext(), DetailActivity.class)
+                        .putExtra(Intent.EXTRA_TEXT, forecastAdapter.getItem(position));
+                startActivity(dailyForecastDetails);
             }
         });
 
@@ -272,7 +277,7 @@ public class ForecastFragment extends Fragment {
                 Log.v("weather", forecastJsonStr);
 
             } catch (IOException e) {
-                Log.e("PlaceholderFragment", "Error ", e);
+                Log.e("DetailFragment", "Error ", e);
                 // If the code didn't successfully get the weather data, there's no point in attemping
                 // to parse it.
                 return null;
@@ -284,7 +289,7 @@ public class ForecastFragment extends Fragment {
                     try {
                         reader.close();
                     } catch (final IOException e) {
-                        Log.e("PlaceholderFragment", "Error closing stream", e);
+                        Log.e("DetailFragment", "Error closing stream", e);
                     }
                 }
             }
