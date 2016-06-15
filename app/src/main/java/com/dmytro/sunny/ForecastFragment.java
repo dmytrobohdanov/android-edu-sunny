@@ -68,6 +68,12 @@ public class ForecastFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        updateWeather();
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.forecastfragment, menu);
     }
@@ -79,21 +85,25 @@ public class ForecastFragment extends Fragment {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_refresh) {
-            FetchWeatherTask weatherTask = new FetchWeatherTask();
-
-            sharedPref= PreferenceManager.getDefaultSharedPreferences(getContext());
-            String location;
-            if(sharedPref != null){
-                location = sharedPref.getString(getString(SettingsActivity.KEY_PREF_LOCATION), "");
-            }
-            else {
-                //some default zip
-                location = "91000";
-            }
-            weatherTask.execute(location);
+            updateWeather();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void updateWeather() {
+        FetchWeatherTask weatherTask = new FetchWeatherTask();
+
+        sharedPref= PreferenceManager.getDefaultSharedPreferences(getContext());
+        String location;
+        if(sharedPref != null){
+            location = sharedPref.getString(getString(SettingsActivity.KEY_PREF_LOCATION), "");
+        }
+        else {
+            //some default zip
+            location = "91000";
+        }
+        weatherTask.execute(location);
     }
 
     @Override
