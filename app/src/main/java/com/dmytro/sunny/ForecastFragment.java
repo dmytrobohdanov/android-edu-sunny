@@ -16,9 +16,11 @@
 package com.dmytro.sunny;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.format.Time;
 import android.util.Log;
@@ -53,6 +55,7 @@ import java.util.List;
 public class ForecastFragment extends Fragment {
 
     private ArrayAdapter<String> mForecastAdapter;
+    private SharedPreferences sharedPref;
 
     public ForecastFragment() {
     }
@@ -77,7 +80,17 @@ public class ForecastFragment extends Fragment {
         int id = item.getItemId();
         if (id == R.id.action_refresh) {
             FetchWeatherTask weatherTask = new FetchWeatherTask();
-            weatherTask.execute("94043");
+
+            sharedPref= PreferenceManager.getDefaultSharedPreferences(getContext());
+            String location;
+            if(sharedPref != null){
+                location = sharedPref.getString(getString(SettingsActivity.KEY_PREF_LOCATION), "");
+            }
+            else {
+                //some default zip
+                location = "91000";
+            }
+            weatherTask.execute(location);
             return true;
         }
         return super.onOptionsItemSelected(item);
