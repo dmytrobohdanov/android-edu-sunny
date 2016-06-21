@@ -28,7 +28,7 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
 
     private final String LOG_TAG = MainActivity.class.getSimpleName();
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             openPreferredLocationInMap();
             return true;
         }
-        
+
         return super.onOptionsItemSelected(item);
     }
 
